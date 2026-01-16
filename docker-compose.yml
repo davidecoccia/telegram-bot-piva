@@ -29,6 +29,9 @@ services:
     depends_on:
       - db
       - redis
+    volumes:
+      - ./receipts_data:/app/receipts_data
+      - ./temp_images:/app/temp_images
 
 
 volumes:

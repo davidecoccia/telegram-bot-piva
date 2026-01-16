@@ -2,8 +2,13 @@
 import logging
 from dataclasses import dataclass
 from os import getenv
+from pathlib import Path
 
+from dotenv import load_dotenv
 from sqlalchemy.engine import URL
+
+# Load environment variables from .env file
+load_dotenv()
 
 
 @dataclass
@@ -13,7 +18,7 @@ class DatabaseConfig:
     name: str | None = getenv("POSTGRES_DATABASE")
     user: str | None = getenv("POSTGRES_USER")
     passwd: str | None = getenv("POSTGRES_PASSWORD", None)
-    port: int = int(getenv("POSTGRES_PORT", 5432))
+    port: int = int(getenv("POSTGRES_PORT", "5432"))
     host: str = getenv("POSTGRES_HOST", "db")
 
     driver: str = "asyncpg"
@@ -49,7 +54,22 @@ class RedisConfig:
 class BotConfig:
     """Bot configuration."""
 
-    token: str = getenv("BOT_TOKEN")
+    token: str | None = getenv("BOT_TOKEN")
+
+
+@dataclass
+class AWSConfig:
+    """AWS configuration for Bedrock."""
+
+    bearer_token: str | None = getenv("AWS_BEARER_TOKEN_BEDROCK")
+    region: str = getenv("AWS_REGION", "us-east-1")
+
+
+@dataclass
+class StorageConfig:
+    """Storage configuration."""
+
+    receipts_path: str = getenv("RECEIPTS_STORAGE_PATH", "./receipts_data")
 
 
 @dataclass
@@ -62,3 +82,5 @@ class Configuration:
     db = DatabaseConfig()
     redis = RedisConfig()
     bot = BotConfig()
+    aws = AWSConfig()
+    storage = StorageConfig()

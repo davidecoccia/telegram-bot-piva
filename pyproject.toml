@@ -15,6 +15,9 @@ asyncpg = "^0.30.0"
 greenlet = "^3.2.3"
 redis = "^6.2.0"
 dishka = "^1.6.0"
+strands-agents = "^1.0.0"
+aiofiles = "^24.1.0"
+pillow = "^11.0.0"
 
 [tool.poetry.group.dev]
 optional=true

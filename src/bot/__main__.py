@@ -14,6 +14,7 @@ from ..configuration import Configuration
 from ..db.di import DatabaseProvider
 from .di import (ConfigurationProvider, FSMStorageProvider,
                  InfrastructureProvider)
+from .di_services import ServicesProvider
 
 
 async def start_bot():
@@ -23,6 +24,7 @@ async def start_bot():
         InfrastructureProvider(),
         FSMStorageProvider(),
         ConfigurationProvider(),
+        ServicesProvider(),
     )
     conf = await container.get(Configuration)
     storage = await container.get(BaseStorage)

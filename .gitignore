@@ -106,3 +106,6 @@ dmypy.json
 .pyre/
 .pytype/
 cython_debug/
+# Expense tracker data
+receipts_data/
+temp_images/

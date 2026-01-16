@@ -1,6 +1,7 @@
 from typing import AsyncIterable, Callable, Final
 
 from aiogram.fsm.storage.base import BaseStorage
+from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.fsm.storage.redis import RedisStorage
 from dishka import Provider, Scope, provide
 from dishka.integrations.aiogram import CONTAINER_NAME
@@ -26,8 +27,21 @@ class InfrastructureProvider(Provider):
 
 class FSMStorageProvider(Provider):
     @provide(scope=Scope.APP)
-    async def get_storage(self, redis: Redis) -> BaseStorage:
-        return RedisStorage(redis=redis)
+    async def get_storage(self, conf: Configuration) -> BaseStorage:
+        # Use memory storage instead of Redis for simplicity
+        # If you want to use Redis, uncomment the lines below and comment out MemoryStorage
+        return MemoryStorage()
+        
+        # For Redis storage (requires Redis running):
+        # redis = Redis(
+        #     db=conf.redis.db,
+        #     host=conf.redis.host,
+        #     password=conf.redis.passwd,
+        #     username=conf.redis.username,
+        #     port=conf.redis.port,
+        #     decode_responses=True
+        # )
+        # return RedisStorage(redis=redis)
 
 
 class ConfigurationProvider(Provider):

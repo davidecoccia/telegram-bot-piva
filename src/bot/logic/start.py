@@ -12,6 +12,24 @@ start_router = Router(name="start")
 @start_router.message(CommandStart())
 async def start_handler(message: types.Message):
     """Start command handler."""
-    # return await message.answer('Hi, telegram!')
-    # Use telegram wrapper to automatically handle exceptions like RetryAfter or ForbiddenError
-    return await telegram_wrapper(message.answer, text="Hi, telegram!")
+    welcome_text = """👋 Welcome to <b>Expense Tracker Bot</b>!
+
+I help professionals track expenses for tax purposes using AI-powered receipt scanning.
+
+📸 <b>How to use:</b>
+Simply send me a photo of your receipt, and I'll automatically extract:
+• Location/Business name
+• Date of purchase
+• Expense category
+• Amount and currency
+• Items purchased
+
+All your expenses are saved securely for easy tax reporting!
+
+Try it now - just send me a receipt photo! 📄"""
+
+    return await telegram_wrapper(
+        message.answer,
+        text=welcome_text,
+        parse_mode="HTML",
+    )

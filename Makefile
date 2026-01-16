@@ -5,6 +5,8 @@ help:
 	@echo ""
 	@echo "AVAILABLE COMMANDS"
 	@echo "  run		Start the bot (for docker-compose usage)"
+	@echo "  test-scanner	Test receipt scanner without Telegram"
+	@echo "  setup		Run setup script"
 	@echo "  project-start Start with docker-compose"
 	@echo "  project-stop  Stop docker-compose"
 	@echo "  lint		Reformat code"
@@ -33,6 +35,14 @@ lint: blue isort ruff mypy
 run:
 	migrate
 	poetry run python -m src.bot
+
+.PHONY: test-scanner
+test-scanner:
+	poetry run python test_receipt_scanner.py
+
+.PHONY: setup
+setup:
+	./setup.sh
 
 # Poetry and environments utils
 REQUIREMENTS_FILE := requirements.txt

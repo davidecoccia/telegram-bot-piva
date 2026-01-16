@@ -5,7 +5,78 @@
 ![](https://img.shields.io/github/stars/MassonNn/masson-aiogram-template?style=flat-square)
 [![telegram](https://img.shields.io/badge/Telegram-Join-blue)](https://t.me/massonnn_yt)
 
+# 🤖 AI-Powered Expense Tracker Bot
+
+A professional Telegram bot for tracking business expenses using AI-powered receipt scanning. Built with **Strands AI**, **AWS Bedrock**, and **Claude 4 Sonnet** vision model.
+
+## ✨ Features
+
+- 📸 **Smart Receipt Scanning** - Just send a photo, AI does the rest
+- 🧠 **Vision AI** - Powered by Claude 4 Sonnet via AWS Bedrock
+- 💾 **Automatic Storage** - Structured JSON data for tax reporting
+- 🏷️ **Smart Categorization** - Automatic expense categorization
+- 📊 **Tax Ready** - Export-ready data format
+- ⚡ **Real-time Processing** - Get results in seconds
+
+## 🚀 Quick Start
+
+See **[QUICKSTART.md](QUICKSTART.md)** for detailed setup instructions.
+
+```bash
+# 1. Setup
+./setup.sh
+
+# 2. Configure .env with your credentials
+cp .env.dist .env
+# Edit .env with BOT_TOKEN and AWS credentials
+
+# 3. Run
+poetry run python -m src.bot
+```
+
+## 📚 Documentation
+
+- **[QUICKSTART.md](QUICKSTART.md)** - Get started in 5 minutes
+- **[AWS_BEDROCK_SETUP.md](AWS_BEDROCK_SETUP.md)** - Detailed AWS Bedrock API key setup
+- **[README_EXPENSE_TRACKER.md](README_EXPENSE_TRACKER.md)** - Full feature documentation
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** - System design and architecture
+- **[IMPLEMENTATION_SUMMARY.md](IMPLEMENTATION_SUMMARY.md)** - Implementation details
+- **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** - Common issues and solutions
+
+## 🎯 Use Case
+
+Perfect for:
+- Freelancers tracking business expenses
+- Small business owners
+- Professionals managing tax deductions
+- Anyone who needs to track receipts for reimbursement
+
+## 🛠️ Tech Stack
+
+- **Bot Framework**: Aiogram 3.x
+- **AI Framework**: Strands Agents SDK
+- **LLM**: Claude 4 Sonnet (AWS Bedrock)
+- **Storage**: File-based JSON (PostgreSQL ready)
+- **DI**: Dishka
+- **Language**: Python 3.13+
+
+## 📋 Requirements
+
+- Python 3.13+
+- Telegram Bot Token
+- AWS Bedrock API Key
+
+**Optional** (not needed for basic expense tracking):
+- PostgreSQL (for database storage instead of files)
+- Redis (for caching)
+- Docker (for containerized deployment)
+
+**Note**: Uses AWS Bedrock API keys (simpler than IAM credentials). Get yours from AWS Console → Bedrock → API Keys.
+
+See [OPTIONAL_SERVICES.md](OPTIONAL_SERVICES.md) for details on what's required vs optional.
+
 ---
+
 ## Setup bot
 
 1. Clone this repository
@@ -29,6 +100,13 @@ This will start isort, blue and ruff to src and tests folders
 You can manually run any instrument by: \
 `make ruff`, `make blue` or `make isort`
 
+### Testing
+
+Test the receipt scanner without Telegram:
+```bash
+make test-scanner
+```
+
 ### Migrations
 `make generate NAME=<name>` \
 Generate alembic revision for migration with given name
@@ -39,8 +117,21 @@ Apply migrations to the target database
 ---
 ## Roadmap
 
-- Add Github Actions CI/CD
-- Light (simplified) version without docker and CI/CD
-- Highload version with NATS and Docker Swarm
-- More tests kit and update factory
+- [x] AI-powered receipt scanning
+- [x] Vision LLM integration (Claude 4 Sonnet)
+- [x] File-based storage
+- [ ] Database storage (PostgreSQL)
+- [ ] Receipt history and search
+- [ ] Export to CSV/Excel
+- [ ] Monthly expense reports
+- [ ] Multi-currency support
+- [ ] Category customization
+- [ ] Github Actions CI/CD
+- [ ] Light (simplified) version without docker and CI/CD
+- [ ] Highload version with NATS and Docker Swarm
+- [ ] More tests kit and update factory
+
+## 📄 License
+
+MIT License
 
